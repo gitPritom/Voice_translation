@@ -11,7 +11,7 @@ class StoreTranslationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,29 @@ class StoreTranslationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'audio' => [
+                'required',
+                'file',
+                'mimes:mp3,wav,webm,ogg,mpeg',
+                'max:'.(30 * 1024), // 30MB max
+            ],
+            'source_language' => ['nullable', 'string', 'max:10'],
+            'target_language' => ['required', 'string', 'max:10'],
+        ];
+    }
+
+    /**
+     * Get custom error messages.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'audio.required' => 'Please record or upload an audio file.',
+            'audio.mimes' => 'The audio file must be in MP3, WAV, WebM, or OGG format.',
+            'audio.max' => 'The audio file must not be larger than 30MB.',
+            'target_language.required' => 'Please select a target language.',
         ];
     }
 }
