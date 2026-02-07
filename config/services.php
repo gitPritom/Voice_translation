@@ -35,4 +35,15 @@ return [
         ],
     ],
 
+    'openai' => [
+        'api_key' => env('OPENAI_API_KEY'),
+        'model_whisper' => env('OPENAI_MODEL_WHISPER', 'whisper-1'),
+        'model_translation' => env('OPENAI_MODEL_TRANSLATION', 'gpt-4o-mini'),
+    ],
+
+    'murf' => [
+        'api_key' => env('MURF_API_KEY'),
+        'api_url' => env('MURF_API_URL', 'https://global.api.murf.ai/v1'),
+    ],
+
 ];
